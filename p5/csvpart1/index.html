@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Grap CSV</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body>
+    <script>
+    // https://data.giss.nasa.gov/gistemp/
+    // we are going to use the split function to make the data
+    // slice() can give us
+      getData();
+      async function getData() {
+      const response = await fetch('ZonAnn.Ts+dSST.csv');
+      const data = await response.text();
+      //WE use sclide to get a portion of the array in this case we want it from index 1
+      const table = data.split('\n').slice(1);
+      table.forEach(row =>{
+        const cols = row.split(',')
+        const year = cols[0];
+        const temp = cols[1];
+        console.log(year,temp);
+      });
+    }
+    </script>
+  </body>
+</html>

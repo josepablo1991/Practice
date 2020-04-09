@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js example</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body>
+    <img src="" id="mexico" width=480 />
+    <script>
+      console.log('about to fetch image');
+
+      catchMexico().then(
+        response => {
+          console,log('yay')
+        }
+      ).catch(error => { // way to handle errors
+       console.log("error!")
+       console.error(error);
+       });;
+
+      async function catchMexico() {
+        const response = await fetch('mexico.png');
+        const blob = await response.blob();
+        document.getElementById('mexico').src = URL.createObjectURL(blob);
+      }
+
+      // fetch('mexico.png').then(response =>{
+      //   console.log(response);
+      //   return response.blob();
+      // }).then(blob => {
+      //   console.log(blob);
+      //   document.getElementById('mexico').src = URL.createObjectURL(blob);
+      // })
+      // .catch(error => { // way to handle errors
+      //   console.log("error!")
+      //   console.error(error);
+      // });
+    </script>
+  </body>
+</html>
