@@ -7,9 +7,10 @@ function chartIt(){
           labels: x,
           datasets: [{
               data: y,
-              label: gdr,
+              label: 'Population Growth rate '+gdr.toFixed(2),
               fill: false,
               borderColor:'rgba(255, 99, 132, 1)',
+              maxTicksLimit:1
           }
         ]
 
@@ -17,7 +18,7 @@ function chartIt(){
 
       options: {
         animation: {
-          duration: 0
+          duration: 1
       },
       tooltips: {
           callbacks: {
@@ -25,7 +26,15 @@ function chartIt(){
                   return Number(tooltipItem.yLabel).toFixed(2);
               }
           }
-      }
+      },
+      scales: {
+            yAxes: [{
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 1
+                }
+            }]
+        }
 
   }});
 }

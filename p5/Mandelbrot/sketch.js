@@ -11,75 +11,74 @@ let y = [];
 
 function setup() {
 
-//  frameRate(10);
-    gdr = 0;
+  function beforePrintHandler () {
+    for (var id in Chart.instances) {
+        Chart.instances[id].resize();
+    }
+}
+
+  //  frameRate(10);
+  gdr = 0;
 
   cycles = 100;
 
- for (var i=0;i<cycles;i++){
+  for (var i = 0; i < cycles; i++) {
 
-   let prev =initial_pop;
+    let prev = initial_pop;
 
-   if (i>0){
-     prev = population[i-1].result;
-   }
-   else{
-     let prev = initial_pop;
-   }
+    if (i > 0) {
+      prev = population[i - 1].result;
+    } else {
+      let prev = initial_pop;
+    }
 
-   population[i] = new Citezen(initial_pop,gdr,i,prev);
+    population[i] = new Citezen(initial_pop, gdr, i, prev);
 
- }
+  }
 
 
- for (var i=0; i<population.length;i++){
-      x.push(population[i].time);
-      y.push(population[i].result);
+  for (var i = 0; i < population.length; i++) {
+    x.push(population[i].time);
+    y.push(population[i].result);
 
- }
+  }
 
 }
 
-function draw(){
+function draw() {
   //
   // gdr = document.getElementById("myRange");
   // gdr = gdr.value;
   // gdr = map(gdr,100,0,3,0);
-  if(gdr > 4) {
+  frameRate(1);
+  if (gdr > 4) {
     gdr = 0;
   }
   cycles = 100;
   console.log(gdr);
 
-  for (var i=0;i<cycles;i++){
+  for (var i = 0; i < cycles; i++) {
 
-    let prev =initial_pop;
+    let prev = initial_pop;
 
-    if (i>0){
-      prev = population[i-1].result;
-    }
-    else{
+    if (i > 0) {
+      prev = population[i - 1].result;
+    } else {
       let prev = initial_pop;
     }
 
-    population[i] = new Citezen(initial_pop,gdr,i,prev);
+    population[i] = new Citezen(initial_pop, gdr, i, prev);
 
   }
 
-  for (var i=0; i<population.length;i++){
-       x[i] =(population[i].time);
-       y[i] =(population[i].result);
+  for (var i = 0; i < population.length; i++) {
+    x[i] = (population[i].time);
+    y[i] = (population[i].result);
 
   }
-
+  gdr.toFixed(2)
   chartIt();
+  gdr += 0.1;
+  gdr.toFixed(2)
 
-  gdr += 0.01;
-
-  }
-
-
-
-
-
-
+}
